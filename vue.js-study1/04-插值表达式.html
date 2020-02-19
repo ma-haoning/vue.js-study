@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{"你知道前端的水有点深吗？"}}</p>
+        <p>{{showMessage}}</p>
+        <p>{{fn()}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vw = new Vue({
+            el: "#app",
+            data: {
+                msg: "我要成为前端程序员",
+                showMessage: false,
+                list: [1, 2, 3]
+            },
+            methods: {
+                fn() {
+                    var arr = [...this.list];
+                    return arr.reverse().join("");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

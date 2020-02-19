@@ -16,6 +16,8 @@
         <p>{{weight}}</p>
         <p>{{pwd}}</p>
         <p>{{height}}</p>
+        <!-- <p>{{arr.reverse().join("")}}</p> -->
+        <p>{{fn3()}}</p>
     </div>
     <!-- //2.引入vuejs -->
     <script src="./vue.js"></script>
@@ -28,7 +30,8 @@
                 name: "Hello World",
                 weight: "200kg",
                 pwd: "232",
-                height: 185
+                height: 185,
+                arr: [1, 2, 3]
             },
             methods: {
                 fn1() {//this指向 vm这个实例化对象
@@ -36,7 +39,12 @@
                 },
                 fn2() {
                     console.log(this.fn1());
+                },
+                fn3() {
+                    var arr1 = vm.arr;  // arr1变化之后arr也会改变  [...this.arr]这样的写法会出来一个复印件 复印件改变 arr不会改变 [...this.arr]是一个快速的实现复印件的方法
+                    console.log(vm.arr);
 
+                    return arr1.reverse().join("")
                 }
             }
         });

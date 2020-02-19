@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <p>{{money}}</p>
+        <p>{{list}}</p>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message: "天生我材必有用",
+                money: 13000,
+                list: ["盖茨", "巴菲特", "贝索斯"]
+            }
+        });
+        console.log(vm.message, vm.money, vm.list);
+        vm.message = "千金散尽还复来";
+        vm.money = 100000;
+        vm.list = ["盖茨", "巴菲特", "贝索斯", "wo"]
+    </script>
+</body>
+
+</html>
