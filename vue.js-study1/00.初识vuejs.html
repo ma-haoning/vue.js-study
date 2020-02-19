@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 1.管理视图 -->
+    <div id="app">
+        <!-- 5.在视图中显示data中的数据 -->
+        <!-- 数据可以直接写下 不需要加data -->
+        <p>{{name}}</p>
+        <p>{{weight}}</p>
+        <p>{{pwd}}</p>
+        <p>{{height}}</p>
+    </div>
+    <!-- //2.引入vuejs -->
+    <script src="./vue.js"></script>
+    <script>
+        //3.实例化对象
+        var vm = new Vue({
+            //4.构造函数的参数
+            el: "#app",
+            data: {//数据
+                name: "Hello World",
+                weight: "200kg",
+                pwd: "232",
+                height: 185
+            },
+            methods: {
+                fn1() {//this指向 vm这个实例化对象
+                    console.log(this.name);
+                },
+                fn2() {
+                    console.log(this.fn1());
+
+                }
+            }
+        });
+        vm.name = "1"
+
+    </script>
+</body>
+
+</html>
