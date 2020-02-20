@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 实现p标签和input标签双向数据流 -->
+        <p>{{nameInput}}</p>
+        <input type="text" v-model="nameInput">
+        <!-- 实现p标签和textarea标签双向数据流 -->
+        <p>{{nameTextarea}}</p>
+        <textarea name="" id="" cols="30" rows="10" v-model="nameTextarea"></textarea>
+        <!-- 实现p标签和checkbox标签双向数据流 1.布尔值   2.数组-->
+        <p>{{nameCheckbox}}</p>
+        <input type="checkbox" name="" id="" v-model="nameCheckbox">你吃屎了吗？
+        <!-- 实现p标签和checkbox标签双向数据流 1.布尔值   2.数组-->
+        <p>{{nameCheckboxs}}</p>
+        <input type="checkbox" name="" id="" value="bj" v-model="nameCheckboxs">北京
+        <input type="checkbox" name="" id="" value="sh" v-model="nameCheckboxs">上海
+        <input type="checkbox" name="" id="" value="sz" v-model="nameCheckboxs">深圳
+        <!-- 实现p标签和radio标签双向数据流 -->
+        <p>{{nameRadio}}</p>
+        <input type="radio" name="" id="" value="nan" v-model="nameRadio">男
+        <input type="radio" name="" id="" value="nv" v-model="nameRadio">女
+        <!-- 实现p标签和select标签双向数据流 -->
+        <p>{{nameSelect}}</p>
+        <select name="" id="" v-model="nameSelect">
+            <option value=""></option>
+            <option value="bj">北京</option>
+            <option value="sh">上海</option>
+            <option value="sz">深圳</option>
+        </select>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                nameInput: "p和input",
+                nameTextarea: "p和textarea",
+                nameCheckbox: false,
+                nameCheckboxs: ["bj"],
+                nameRadio: "nv",
+                nameSelect: "sh"
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

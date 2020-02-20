@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 300px;
+            height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="start">开始轮播</button>
+        <img :src="list[currentIndex]" alt="">
+        <button @click="stop">结束轮播</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1474924329,334274269&fm=26&gp=0.jpg",
+                    "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3550448005,2811962219&fm=26&gp=0.jpg",
+                    "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1820525113,2654309761&fm=26&gp=0.jpg",
+                    "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3355532718,3229393495&fm=26&gp=0.jpg",
+                    "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3569568380,3888308202&fm=26&gp=0.jpg"],
+                currentIndex: -1
+            },
+            methods: {
+                start() {
+                    //优化 当一次也没有启动过定时器的时候 才会启动定时器
+                    //第一次启动定时器  这个flag是不存在的 取反 就是true  会执行下面的代码 如果第二次点击开始轮播 flag已经存在  取反就是false  不会进来这个分支 点击n多次也不会有效果  
+                    if (!this.flag) {
+                        //箭头函数内部的this指向上一级元素的this  所以指向vm
+                        let func = () => {
+                            if (this.currentIndex < this.list.length - 1) {
+                                this.currentIndex++
+                            }
+                            else {
+                                this.currentIndex = 0
+                            }
+                        }
+                        //设置一个定时器 这个this指向vm
+                        this.flag = setInterval(func, 500)
+                    }
+                },
+                stop() {
+                    clearInterval(this.flag);
+                    //点击清除定时器 重新给flag赋值  让flag定时器一次也没有启动过  下次点击开始轮播是 定时器的状态就是一次也没有启动过
+                    this.flag = null;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

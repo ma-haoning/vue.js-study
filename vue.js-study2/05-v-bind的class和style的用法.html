@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .par {
+            font-size: 50px;
+        }
+
+        .par1 {
+            color: red;
+        }
+
+        .par2 {
+            font-size: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-bind绑定class对象 {类名：布尔值}-->
+        <div v-bind:class="{par:show}">欢迎回家</div>
+        <!-- v-bind绑定class数组 -->
+        <p v-bind:class="[show1,show2]">我是你男朋友</p>
+        <!-- v-bind绑定style对象的用法  css属性名用驼峰命名-->
+        <p v-bind:style="{fontSize:show3}">今天天气不错</p>
+        <!-- v-bind绑定style数组  数组内部是每个对象-->
+        <p v-bind:style="[obj1,obj2]">明天会更难呀</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                show: true,
+                show1: "par1",
+                show2: "par2",
+                show3: "100px",
+                obj1: {
+                    fontSize: "10px"
+                },
+                obj2: {
+                    color: "red"
+                }
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
