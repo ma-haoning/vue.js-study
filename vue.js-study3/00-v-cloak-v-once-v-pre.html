@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <!-- 切记不能把 v-once 和v-pre  放在根容器下 -->
+        <!-- v-cloak vuejs渲染之前隐藏  渲染完成时候显示 -->
+        <p>{{name}}</p>
+        <!-- v-once  只执行一次 -->
+        <p v-once>{{show}}</p>
+        <!-- v-pre  跳过此段执行 -->
+        <p v-pre>{{hideew e e}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: "mhn",
+                show: "ok",
+                hide: "kk"
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>

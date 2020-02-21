@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>老高的表格案例</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-8">
+        <div class="page-header">
+          <h1>表格案例 <small>Follow me!!!</small></h1>
+        </div>
+        <!-- 添加框 -->
+        <div class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="请输入你理想的公司" v-model.trim="name" />
+            <!-- v-model.trim把空格给取消掉 -->
+          </div>
+          <!-- disabled true是无法选择  当name存在的时候  取反就是false 取消无法选择   当name不存在的时候 取反就是true 无法选择状态-->
+          <button class="btn btn-success" type="submit" @click="addItem" :disabled="!name">添加</button>
+        </div>
+        <!-- 搜索框 -->
+        <div class="form-inline" style="margin: 20px 0">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="搜索关键字" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <table class="table table-hover">
+          <thead>
+            <th>#</th>
+            <th>公司名称</th>
+            <th>事件</th>
+            <th>操作</th>
+          </thead>
+          <tbody>
+            <!-- 谁要循环就要给谁加 v-for -->
+            <tr v-for="(item,index) in list" :key="index">
+              <td>{{index+1}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.date}}</td>
+              <td>
+                <!-- .prevent取消默认跳转 -->
+                <a href="#" @click.prevent="delItem(index)">删除</a>
+              </td>
+            </tr>
+            <!-- 如果数组中有元素说明是true 取反就是false  false在v-if就是隐藏-->
+            <tr v-if="!list.length">
+              <td colspan="4" style="color:#999">没有任何数据</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: ".container-fluid",
+      data: {
+        name: "",
+        list: [
+          { name: "腾讯", date: new Date() },
+          { name: "阿里巴巴", date: new Date() },
+          { name: "抖音", date: new Date() },
+          { name: "今日头条", date: new Date() }
+        ]
+      },
+      methods: {
+        addItem() {
+          //给原来的数组 从前添加
+          this.list.unshift({
+            name: this.name,
+            date: new Date(),
+          });
+          this.name = ""
+        },
+        delItem(i) {
+          if (confirm("你确定要删除吗")) {
+            this.list = this.list.filter((item, index) => {
+              //返回的是  当前点击的删除按钮的下标不等于循环数组的下标的每一项
+              return index != i
+            })
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

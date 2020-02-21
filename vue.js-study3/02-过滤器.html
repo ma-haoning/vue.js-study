@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p> {{str|daXie}}</p>
+        <p>{{name|changeName}}</p>
+        <input type="text" v-model="name">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // 过滤器只会对有过滤器内容的数据进行过滤  对原始数据没有任何影响
+        Vue.filter("daXie", function (value) {
+            //charAt 取字符串()内部是下标的值   toUpperCase 去大写   substr字符串的截取
+            return value.charAt(0).toUpperCase() + value.substr(1)
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                str: "abc",
+                name: "马浩宁"
+            },
+            methods: {},
+            filters: {
+                //split字符串转数组  join数组转字符串   map数组的方法  返回值是  原来数组个数是多少返回的数组个数和之前的数组个数一样  内容不一样而已
+                "changeName": function (value) {
+                    return value.split("").map(function (item, index) {
+                        if (index == 2) {
+                            return "宇"
+                        }
+                        return item
+                    }).join("");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
