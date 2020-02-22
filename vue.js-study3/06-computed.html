@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{name}}</p>
+        <p>{{str}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: "mhn"
+            },
+            methods: {},
+            computed: {
+                //计算属性和过滤器与自定义指令不一样 
+                //计算属性 直接当做变量往dom上写即可
+                //过滤器需要 加上 |
+                //自定义指令则需要 加上 v-
+                str: function () {
+                    return this.name.split("").reverse().join("")
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

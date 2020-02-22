@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-mhn="name"></p>
+        <input type="text" v-model="name">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: "马浩宁"
+            },
+            methods: {},
+            directives: {
+                mhn: {//dom是当前的标签的对象  option是标签内部表达式的值得对象
+                    inserted(dom, option) { //inserted只是执行一次 如果还需要执行的话  就需要在update中添加内容
+                        dom.innerText = option.value + "你爸爸"  //第一次执行过后 按理说input内容变化  p标签的内容也会变化 因为双向数据流 但是此时不会变了  因为inserted只执行一次
+                    },
+                    update(dom, option) {
+                        dom.innerText = option.value + "你爸爸"
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

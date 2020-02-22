@@ -16,7 +16,7 @@
     </div>
     <script src="./vue.js"></script>
     <script>
-        // 过滤器只会对有过滤器内容的数据进行过滤  对原始数据没有任何影响
+        // 过滤器只会对有过滤器内容的数据进行过滤  对原始数据没有任何影响 
         Vue.filter("daXie", function (value) {
             //charAt 取字符串()内部是下标的值   toUpperCase 去大写   substr字符串的截取
             return value.charAt(0).toUpperCase() + value.substr(1)

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- ref获取dom对象 然后就可以为所欲为  调用的时候 注意 $refs.名字 -->
+        <input type="text" ref="myInput">
+        <button @click="getInputValue">按钮</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                getInputValue() {
+                    console.log(this.$refs.myInput.value);
+                    console.dir(this.$refs.myInput);
+
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

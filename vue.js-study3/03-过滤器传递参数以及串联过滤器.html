@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 过滤器中不需要加() 如果需要实参则加()  第一个实参对应的是函数内部的第二个形参 默认函数内部的第一个形参是差值表达式里面的值 -->
+        <p>{{name|toOtherStr(2)|toReverse}}</p>
+        <input type="text" v-model="name">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: "马浩宁"
+            },
+            methods: {},
+            filters: {
+                //函数里面的第一次参数永远是插值表达式里面的值
+                toOtherStr: function (value, i) {
+                    //过滤器内部需要  return出来值
+                    return value.split("").map(function (item, index) {
+                        if (index == i) { return "宇" }
+                        return item
+                    }).join("")
+                },
+                //串联过滤器中 value值是对前面过滤器值得继承  
+                toReverse: function (value) {
+                    return value.split("").reverse().join("")
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

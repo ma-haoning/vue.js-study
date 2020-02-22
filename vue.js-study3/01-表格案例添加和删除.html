@@ -22,7 +22,7 @@
         <!-- 添加框 -->
         <div class="form-inline">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="请输入你理想的公司" v-model.trim="name" />
+            <input type="text" class="form-control" placeholder="请输入你理想的公司" v-model.trim="name" v-mhn />
             <!-- v-model.trim把空格给取消掉 -->
           </div>
           <!-- disabled true是无法选择  当name存在的时候  取反就是false 取消无法选择   当name不存在的时候 取反就是true 无法选择状态-->
@@ -31,7 +31,7 @@
         <!-- 搜索框 -->
         <div class="form-inline" style="margin: 20px 0">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="搜索关键字" />
+            <input type="text" class="form-control" placeholder="搜索关键字" v-model="searchStr" />
           </div>
         </div>
       </div>
@@ -48,17 +48,18 @@
           </thead>
           <tbody>
             <!-- 谁要循环就要给谁加 v-for -->
-            <tr v-for="(item,index) in list" :key="index">
+            <tr v-for="(item,index) in search" :key="index">
               <td>{{index+1}}</td>
               <td>{{item.name}}</td>
-              <td>{{item.date}}</td>
+              <td>{{item.date|datePra}}</td>
               <td>
                 <!-- .prevent取消默认跳转 -->
                 <a href="#" @click.prevent="delItem(index)">删除</a>
               </td>
             </tr>
             <!-- 如果数组中有元素说明是true 取反就是false  false在v-if就是隐藏-->
-            <tr v-if="!list.length">
+            <tr v-if="!search.length">
+              <!-- true显示 false隐藏 、 -->
               <td colspan="4" style="color:#999">没有任何数据</td>
             </tr>
           </tbody>
@@ -67,11 +68,19 @@
     </div>
   </div>
   <script src="./vue.js"></script>
+  <script src="./moment.min.js"></script>
   <script>
+    //添加全局自定义指令
+    Vue.directive("mhn", {
+      inserted(dom) {
+        dom.focus();
+      }
+    })
     var vm = new Vue({
       el: ".container-fluid",
       data: {
         name: "",
+        searchStr: "",
         list: [
           { name: "腾讯", date: new Date() },
           { name: "阿里巴巴", date: new Date() },
@@ -95,6 +104,24 @@
               return index != i
             })
           }
+        }
+      },
+      filters: {
+        datePra: function (value) {
+          //对时间进行格式化
+          return moment(value).format("YYYY-MM-DD HH:mm:ss");
+        }
+      },
+      computed: {
+        search() {
+          // this.searchStr  //拿到搜索框的值
+          // this.list  //拿到list数组
+          return this.list.filter((item) => {
+            //这个返回的true false
+            // console.log(item.name.includes(this.searchStr));
+            //当搜索框内什么也没有的时候  也可以把list数组返回出来
+            return item.name.includes(this.searchStr)
+          })
         }
       }
     });
