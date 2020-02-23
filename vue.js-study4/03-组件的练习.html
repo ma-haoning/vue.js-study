@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        img {
+            width: 200px;
+        }
+
+        .first {
+            display: inline-block;
+            margin: 40px;
+        }
+
+        .info {
+            font-size: 35px;
+            padding-left: 30px;
+        }
+
+        span:nth-child(2) {
+            margin: 0 40px;
+        }
+
+        span {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <zujian-btn v-for="item in 100"></zujian-btn>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        //声明全局的组件
+        Vue.component("zujian-btn", {
+            //模板
+            template: `<div class="first">
+                <img src="https://m.360buyimg.com/babel/jfs/t1/105372/30/10877/137850/5e242cb4Ee34961cd/200e3d9d780891cd.jpg!q70.jpg"   />
+                <div class="info"><span @click="cut" v-if="count">-</span><span>{{count}}</span><span @click="add">+</span></div>
+                </div>`,
+            data() {
+                return {
+                    count: 1,
+                    aaa: "not-allowed"
+                }
+            },
+            methods: {
+                //+1
+                add() {
+                    this.count++
+                },
+                cut() {
+                    this.count--
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {}
+        });
+    </script>
+</body>
+<!-- https://m.360buyimg.com/babel/jfs/t1/105372/30/10877/137850/5e242cb4Ee34961cd/200e3d9d780891cd.jpg!q70.jpg -->
+
+</html>
