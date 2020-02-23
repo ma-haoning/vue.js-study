@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="changImg">按钮</button>
+        <img style="width: 300px;" :src="item" alt="" v-for="item in list">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            methods: {
+                changImg: function () {
+                    new Promise(function (resolve, reject) {
+                        setTimeout(function () {
+                            resolve(Math.random())
+                        }, 500)
+                    }).then(function (data) {
+                        return Math.ceil(data * 10)
+                    }).then(data => {  //这里需要改成箭头函数 要不然this指向window  箭头函数的this内部指向父级元素的this
+                        return this.list = Array.from(Array(data)).map(function (item) {
+                            //map这个数组的方法需要 return
+                            return "http://a3.att.hudong.com/68/61/300000839764127060614318218_950.jpg"
+                        })
+                    }).then(function (data) {
+                        // console.log(data);
+
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

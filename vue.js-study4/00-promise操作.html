@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //异步是指 setTimeout setInterval  ajax请求数据  会进入任务栏
+        //实例化  参数是成功以后的数据 失败之后的数据
+        new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve(100)
+            }, 1000)
+        }).then(function (data) {
+            // console.log(data);  
+            //第二次请求的结果  会return出去 返回给根部执行链
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    reject("出错啦")
+                }, 1000)
+            })
+        }).then(function (data) {
+            return data + 200  //同步的话直接return 不需要实例化
+            // return Promise.reject("出错啦")
+        }).then(function (data) {
+            console.log(data);
+
+        }).catch(function (err) {
+            console.log(err);
+            //同步不需要再次实例化promise 异步则需要promise 异步包括 定时器 setTimeout setInterval ajax请求数据 
+        })
+    </script>
+</body>
+
+</html>
