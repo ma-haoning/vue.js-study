@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .top {
+            width: 1000px;
+            margin: 50px auto 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .top a {
+            display: inline-block;
+            width: 150px;
+            height: 60px;
+            background-color: skyblue;
+            line-height: 60px;
+            text-align: center;
+            font-size: 25px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .bottom {
+            width: 1000px;
+            margin: 10px auto 0;
+            height: 550px;
+        }
+
+        .bottom img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 设置导航和容器 -->
+        <div class="top">
+            <!-- 在vue-router中 to是一个固定的属性  引号中需要加上/ -->
+            <router-link to="/mj">麦基</router-link>
+            <router-link to="/gl">格林</router-link>
+            <router-link to="/bldl">布拉德利</router-link>
+            <router-link to="/ld">隆多</router-link>
+        </div>
+        <div class="bottom">
+            <router-view></router-view>
+        </div>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+        //实例化一个vue-router
+        var router = new VueRouter({
+            //配置router  routes选项必须存在 routes下有name(可以不写) path
+            //   (对应上面设置导航里面的 to) component(组件内容和之前的一样)
+            routes: [{
+                path: "/mj",
+                component: {
+                    template: `<img src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1888145871,780345173&fm=26&gp=0.jpg" />`
+                }
+            }, {
+                path: "/gl",
+                component: {
+                    template: `<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3799242323,2595434852&fm=111&gp=0.jpg" />`
+                }
+            }, {
+                path: "/bldl",
+                component: {
+                    template: `<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1260368892,134433525&fm=15&gp=0.jpg" />`
+                }
+            }, {
+                path: "/ld",
+                component: {
+                    template: `<img src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3922280923,4063940840&fm=111&gp=0.jpg" />`
+                }
+            }]
+        });
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            //将实例出来的router挂在vue上 产生关系
+            router,
+        });
+    </script>
+</body>
+
+</html>
