@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>马老板在线APP</title>
+    <style>
+        #app {
+            width: 1100px;
+            margin: 50px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .img img {
+            width: 325px;
+            height: 250px;
+        }
+
+        .info {
+            position: relative;
+            height: 40px;
+            line-height: 40px;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .newComponent {
+            position: absolute;
+            right: 10px;
+            bottom: 0;
+        }
+
+        .newComponent span {
+            display: inline-block;
+        }
+
+        .sp {
+            width: 40px;
+            height: 40px;
+            background-color: skyblue;
+            border-radius: 50%;
+            user-select: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .big {
+            border: 1px solid #000;
+            border-radius: 5px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 谁需要父组件的值就在谁的标签上添加 自定义属性  还需要在当前的组件上获取值  props属性  同template同级 -->
+        <list-item :list="item" v-for="(item,index) in list" :key="index" @add-bignum="listNumBigAdd"
+            @cut-bignum="listNumBigCut"></list-item>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        // <!-- 声明全局的组件 -->
+        Vue.component("list-item", {
+            //模板  div有且只有一个根节点
+            template: `<div class="big">  
+                            <div class="img"><img :src="list.img"/></div>
+                            <div class="info">
+                                <span>{{list.title}}</span>
+                                <add-count class="newComponent" :num="list.count" @addNum="listNumAdd" @cutNum="listNumCut"></add-count>
+                            </div>
+                       </div>`,
+            //    []数组内部写的是自定义属性名字
+            props: ["list"],
+            //监听所得到的的值会在上一级父级组件的方法中获得
+            methods: {
+                listNumAdd(i) {
+                    // alert(i)
+                    //继续设置监听  传给Vue实例父级组件
+                    this.$emit("add-bignum", this.list.id, i);
+                    // console.log(this.list.id, i);
+
+                },
+                listNumCut(i) {
+                    //继续设置监听 加上id  方便最后结算
+                    // alert(i)
+                    this.$emit("cut-bignum", this.list.id, i)
+                }
+            },
+            //在全局组件中 创建一个新的组件  当前的这个组件只能在list-item的作用域中使用
+            components: {
+                "add-count": {
+                    //模板
+                    template: `<div>
+                                    <span class="sp" v-if="num" @click="cut">-</span>
+                                    <span v-if="num">{{num}}</span>
+                                    <span class="sp" @click="add">+</span>
+                              </div>`,
+                    //取到值
+                    props: ["num"],
+                    methods: {
+                        //加1
+                        add() {
+                            // alert(this.num + 1)  
+                            //设置监听 监听谁就在谁的标签上设置
+                            this.$emit("addNum", this.num + 1)
+                        },
+                        //减1
+                        cut() {
+                            //设置监听  监听谁就在谁的标签上设置
+                            this.$emit("cutNum", this.num - 1)
+                        }
+                    }
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                //写入数据
+                list: [{
+                    id: 1,
+                    img: "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1126716551,3134048915&fm=26&gp=0.jpg",
+                    title: "烤肉串",
+                    count: 0
+                }, {
+                    id: 2,
+                    img: "https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2868086659,687271532&fm=26&gp=0.jpg",
+                    title: "大龙虾",
+                    count: 0
+                }, {
+                    id: 3,
+                    img: "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2910643299,2019005270&fm=26&gp=0.jpg",
+                    title: "煎蛋烤肉",
+                    count: 0
+                }, {
+                    id: 4,
+                    img: "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=216433551,3486797473&fm=26&gp=0.jpg",
+                    title: "火锅",
+                    count: 0
+                }, {
+                    id: 5,
+                    img: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2083260368,4001805896&fm=11&gp=0.jpg",
+                    title: "串串香",
+                    count: 0
+                },
+                {
+                    id: 6,
+                    img: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3909298518,4045773349&fm=26&gp=0.jpg",
+                    title: "烤面筋",
+                    count: 0
+                }]
+            },
+            methods: {
+                listNumBigAdd(id, num) {
+                    //此时就得到了来自list-item的数据 id和num
+                    // console.log(id, num);
+
+
+                    //find返回的满足条件的数组的元素 filter返回的满足条件的新数组 map return啥就是啥  注意 es6要求：如果执行函数只有一句话就可以把return和{}一起删除 在这里  如果不删除{}  只删除return 浏览器认为你的语句中本来该有return 却么有就会报错
+                    var obj = this.list.find((item) => item.id == id
+                    )
+                    // console.log(obj);
+                    //把从list-item传过来的数据num赋值给obj的count
+                    obj.count = num;
+                },
+                listNumBigCut(id, num) {
+                    //得到id和num
+                    // console.log(id, num);
+                    //得到满足条件的数组的元素
+                    var obj = this.list.find((item) => item.id == id);
+                    //重新赋值
+                    obj.count = num;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
