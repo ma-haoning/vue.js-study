@@ -53,11 +53,17 @@
             border-radius: 5px;
             margin-bottom: 50px;
         }
+
+        [v-cloak] {
+            display: none;
+        }
     </style>
 </head>
+<!-- 父组件给子组件传值规则：谁需要父组件的值就在谁的标签上设置自定义属性 在当前的组件上设置props选项[] 会获取到父组件传来的值 当前的组件就可以用这个值 为所欲为 -->
+<!-- 子组件给父组件传值的规则：通过自定义事件($emit)先获取到当前的值 监听谁就在谁的标签上设置注册事件 注册事件的方法是他的父组件上的一个方法(就可以得到子组件的值)  这样以此类推  父组件就可以获取子组件的值 -->
 
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         <!-- 谁需要父组件的值就在谁的标签上添加 自定义属性  还需要在当前的组件上获取值  props属性  同template同级 -->
         <list-item :list="item" v-for="(item,index) in list" :key="index" @add-bignum="listNumBigAdd"
             @cut-bignum="listNumBigCut"></list-item>
