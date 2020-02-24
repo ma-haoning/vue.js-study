@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .top {
+            width: 1000px;
+            margin: 50px auto 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .top a {
+            display: inline-block;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            background-color: skyblue;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .bottom {
+            width: 1000px;
+            height: 500px;
+            margin: 5px auto 0;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <a href="#zms">勒布朗 詹姆斯</a>
+        <a href="#dws">安东尼 戴维斯</a>
+        <a href="#kzm">库兹马</a>
+        <a href="#hhd">霍华德</a>
+    </div>
+    <div class="bottom" id="bottom">
+
+    </div>
+    <script>
+        //hash锚链接变化 就会执行这个函数
+        var aa = function () {
+            //获取当前的锚链接
+            var path = location.hash.substr(1)
+            // console.log(path);
+            //获取dom节点
+            var dom = document.getElementById("bottom")
+            switch (path) {
+                case "zms":
+                    dom.style.backgroundImage = `url(https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1211421445,312519075&fm=26&gp=0.jpg)`
+                    break;
+                case "dws":
+                    dom.style.backgroundImage = `url(https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2129844754,1976387103&fm=26&gp=0.jpg)`
+                    break;
+                case "kzm":
+                    dom.style.backgroundImage = `url(https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1201652950,1537818559&fm=26&gp=0.jpg)`
+                    break;
+                case "hhd":
+                    dom.style.backgroundImage = `url(https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2056137205,3573244825&fm=26&gp=0.jpg)`
+                    break;
+                default:
+                    break;
+            }
+        }
+        //alt+B  打开之后先让他 自调用
+        aa();
+        //把封装好的函数赋值给window.onhashchange这个方法  让他点击也可以调用函数
+        window.onhashchange = aa;
+
+
+
+    </script>
+</body>
+
+</html>
