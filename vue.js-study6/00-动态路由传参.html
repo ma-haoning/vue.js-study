@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/list">列表项</router-link>
+        <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+        var listObj = {
+            //用到router-link  就需要加上  to属性  要不然会不生效
+            template: `<div>
+                            <router-link v-for="(item,index) in list" :key="index"
+                             :to=" '/info/'+item ">{{item}}</router-link>
+                             
+                        </div>`,
+            data() {
+                //组件里面的数据是一个带有返回值对象的函数
+                return {
+                    list: ["洛杉矶湖人", "迈阿密热火", "洛杉矶快船", "金州勇士"]
+                }
+            }
+        }
+        var infoObj = {
+            template: `<div>
+                            我是NBA{{$route.params.name}}
+                         
+                      </div>`
+        }
+        //实例化vueRouter
+        var router = new VueRouter({
+            routes: [{
+                path: "/list",
+                component: listObj
+            },
+            {
+                //路由动态传参 需要在接收参数的路由中加上  /:参数名
+
+                path: "/info/:name",
+                component: infoObj
+            }
+            ]
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+
+</html>
