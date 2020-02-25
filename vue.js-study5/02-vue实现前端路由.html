@@ -60,27 +60,34 @@
         var router = new VueRouter({
             //配置router  routes选项必须存在 routes下有name(可以不写) path
             //   (对应上面设置导航里面的 to) component(组件内容和之前的一样)
-            routes: [{
-                path: "/mj",
-                component: {
-                    template: `<img src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1888145871,780345173&fm=26&gp=0.jpg" />`
-                }
-            }, {
-                path: "/gl",
-                component: {
-                    template: `<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3799242323,2595434852&fm=111&gp=0.jpg" />`
-                }
-            }, {
-                path: "/bldl",
-                component: {
-                    template: `<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1260368892,134433525&fm=15&gp=0.jpg" />`
-                }
-            }, {
-                path: "/ld",
-                component: {
-                    template: `<img src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3922280923,4063940840&fm=111&gp=0.jpg" />`
-                }
-            }]
+            routes: [
+                //路由重定向
+                {
+                    path: "/",
+                    //重定向
+                    redirect: "/gl"
+                },
+                {
+                    path: "/mj",
+                    component: {
+                        template: `<img src="https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1888145871,780345173&fm=26&gp=0.jpg" />`
+                    }
+                }, {
+                    path: "/gl",
+                    component: {
+                        template: `<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3799242323,2595434852&fm=111&gp=0.jpg" />`
+                    }
+                }, {
+                    path: "/bldl",
+                    component: {
+                        template: `<img src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1260368892,134433525&fm=15&gp=0.jpg" />`
+                    }
+                }, {
+                    path: "/ld",
+                    component: {
+                        template: `<img src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3922280923,4063940840&fm=111&gp=0.jpg" />`
+                    }
+                }]
         });
         var vm = new Vue({
             el: '#app',
