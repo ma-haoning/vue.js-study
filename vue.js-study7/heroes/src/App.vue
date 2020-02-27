@@ -4,7 +4,10 @@
     <div class="container-fluid">
       <div class="row">
         <appAside></appAside>
-        <appMain></appMain>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <!-- 视图必须要有容器收纳 -->
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
