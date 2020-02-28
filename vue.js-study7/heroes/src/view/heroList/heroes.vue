@@ -29,9 +29,9 @@
 </template>
 
 <script>
-const PATH = "http://localhost:8888/heroes";
-//引入 axios模块
-import axios from "axios";
+const PATH = "/heroes";
+// //引入 axios模块
+// import axios from "axios";
 export default {
   data() {
     return {
@@ -43,7 +43,9 @@ export default {
     //获取数据
     getData() {
       //发送请求
-      axios.get(PATH).then(res => {
+      this.$axios.get(PATH).then(res => {
+        // console.log(res);
+
         this.list = res.data;
       });
     },
@@ -51,7 +53,7 @@ export default {
     delData(id) {
       if (confirm("Are you sure?")) {
         //发送请求
-        axios.delete(`${PATH}/${id}`).then(res => {
+        this.$axios.delete(`${PATH}/${id}`).then(res => {
           //重新渲染
           this.getData();
         });

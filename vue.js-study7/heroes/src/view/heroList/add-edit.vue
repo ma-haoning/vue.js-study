@@ -29,7 +29,7 @@
 </template>
 
 <script>
-const PATH = "http://localhost:8888/heroes";
+const PATH = "/heroes";
 //引入axios模块
 import axios from "axios";
 export default {
@@ -59,13 +59,13 @@ export default {
         //判断是否有id  添加的时候一定没有id  编辑的时候只有有id才会去编辑
         if (this.$route.params.id) {
           //编辑分支 发送请求
-          axios
+          this.$axios
             .put(`${PATH}/${this.$route.params.id}`, this.formDate)
             .then(() => {
               this.$router.push("/heroes");
             });
         } else {
-          axios.post(PATH, this.formDate).then(res => {
+          this.$axios.post(PATH, this.formDate).then(res => {
             //添加成功之后直接$router.push
             this.$router.push("/heroes");
           });
@@ -77,7 +77,7 @@ export default {
     //如果是编辑先本内容获取到页面上
     editData() {
       if (this.$route.params.id) {
-        axios.get(`${PATH}/${this.$route.params.id}`).then(res => {
+        this.$axios.get(`${PATH}/${this.$route.params.id}`).then(res => {
           this.formDate = res.data;
         });
       }

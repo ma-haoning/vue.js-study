@@ -6,7 +6,9 @@
         <appAside></appAside>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <!-- 视图必须要有容器收纳 -->
-          <router-view></router-view>
+          <transition name="trans">
+            <router-view></router-view>
+          </transition>
         </div>
       </div>
     </div>
@@ -36,4 +38,13 @@ export default {
 </script>
 
 <style>
+.trans-enter {
+  opacity: 0;
+}
+.trans-enter-to {
+  opacity: 1;
+}
+.trans-enter-active {
+  transition: all 1s;
+}
 </style>

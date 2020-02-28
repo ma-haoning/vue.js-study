@@ -15,6 +15,8 @@ import addedit from "./../view/heroList/add-edit.vue"
 //实例化VueRouter
 const router = new VueRouter({
   //配置路由表
+  //设置link样式  active是bootsrap内置的
+  linkActiveClass: "active",
   routes: [
     //设置重定向  强制跳转
     {
